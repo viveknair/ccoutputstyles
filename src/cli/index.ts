@@ -108,7 +108,7 @@ async function installTemplate(url: string, options: any) {
 }
 
 program
-  .name('ccoutputstyle')
+  .name('ccoutputstyles')
   .description('Install Claude Code output style templates from URLs')
   .version('1.0.0');
 

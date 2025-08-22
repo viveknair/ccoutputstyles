@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${template.name} - ccoutputstyle`,
+    title: `${template.name} - ccoutputstyles`,
     description: template.description,
   };
 }
@@ -38,7 +38,7 @@ export default async function TemplatePage({ params }: PageProps) {
     notFound();
   }
 
-  const installCommand = `npx ccoutputstyle --url https://ccoutputstyles.vercel.app/templates/${slug}`;
+  const installCommand = `npx ccoutputstyles --url https://ccoutputstyles.vercel.app/templates/${slug}`;
 
   return (
     <div className="min-h-screen bg-background">

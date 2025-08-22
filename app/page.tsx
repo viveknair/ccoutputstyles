@@ -32,7 +32,7 @@ export default function Home() {
             <div>
               <h1 className="text-2xl font-semibold text-foreground flex items-center gap-2">
                 <Sparkles className="w-6 h-6 text-accent" />
-                ccoutputstyle
+                ccoutputstyles
               </h1>
               <p className="text-muted-foreground mt-2">
                 Customize Claude Code with pre-built output style templates
@@ -68,7 +68,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Terminal className="w-4 h-4 text-muted-foreground" />
             <code className="text-sm font-mono text-muted-foreground">
-              npx ccoutputstyle --url &lt;template-url&gt;
+              npx ccoutputstyles --url &lt;template-url&gt;
             </code>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function Home() {
             <div>
               <p className="font-medium text-foreground mb-2">Quick install (no installation required):</p>
               <pre className="bg-muted rounded-md p-3">
-                <code className="text-sm">npx ccoutputstyle --url https://ccoutputstyles.vercel.app/templates/critical-code-reviewer</code>
+                <code className="text-sm">npx ccoutputstyles --url https://ccoutputstyles.vercel.app/templates/critical-code-reviewer</code>
               </pre>
             </div>
             

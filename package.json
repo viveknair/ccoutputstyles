@@ -4,7 +4,7 @@
   "description": "Claude Code output style templates gallery and CLI installer",
   "main": "dist/cli/index.js",
   "bin": {
-    "ccoutputstyle": "./bin/ccoutputstyle"
+    "ccoutputstyles": "./bin/ccoutputstyles"
   },
   "scripts": {
     "dev": "next dev",
@@ -24,7 +24,7 @@
   "author": "",
   "license": "MIT",
   "files": [
-    "dist/cli",
+    "dist",
     "bin",
     "templates",
     "README.md"

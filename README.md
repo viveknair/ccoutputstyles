@@ -1,4 +1,4 @@
-# ccoutputstyle
+# ccoutputstyles
 
 CLI tool and template gallery for customizing Claude Code output styles.
 
@@ -7,12 +7,12 @@ CLI tool and template gallery for customizing Claude Code output styles.
 ## Quick Install
 
 ```bash
-npx ccoutputstyle --url https://ccoutputstyles.vercel.app/templates/critical-code-reviewer
+npx ccoutputstyles --url https://ccoutputstyles.vercel.app/templates/critical-code-reviewer
 ```
 
 Or run interactively:
 ```bash
-npx ccoutputstyle
+npx ccoutputstyles
 ```
 
 ## Contributing Templates

@@ -35,7 +35,7 @@ export default function TemplateModal({ template, isOpen, onClose, baseUrl }: Te
 
   if (!isOpen) return null;
 
-  const npxCommand = `npx ccoutputstyle --url ${baseUrl}/templates/${template.fileName.replace('.md', '')}`;
+  const npxCommand = `npx ccoutputstyles --url ${baseUrl}/templates/${template.fileName.replace('.md', '')}`;
 
   const handleCopyContent = async () => {
     await navigator.clipboard.writeText(template.content);
