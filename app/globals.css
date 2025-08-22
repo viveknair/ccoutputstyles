@@ -4,17 +4,13 @@
 
 @layer base {
   :root {
-    --background: #fcfcfc;
-    --foreground: #1e2125;
-    --border: #e2e4e8;
-    --muted: #f7f8f9;
-    --muted-foreground: #697381;
-    --accent: #2563eb;
-    --accent-foreground: #ffffff;
-  }
-
-  * {
-    @apply border-border;
+    --background: 252 252 252;
+    --foreground: 30 33 37;
+    --border: 226 228 232;
+    --muted: 247 248 249;
+    --muted-foreground: 105 115 129;
+    --accent: 37 99 235;
+    --accent-foreground: 255 255 255;
   }
   
   body {
