@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #fcfcfc;
+    --foreground: #1e2125;
+    --border: #e2e4e8;
+    --muted: #f7f8f9;
+    --muted-foreground: #697381;
+    --accent: #2563eb;
+    --accent-foreground: #ffffff;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-synthesis: none;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  pre {
+    @apply bg-muted rounded-lg overflow-x-auto;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  code {
+    @apply font-mono text-sm;
+    word-spacing: -0.1em;
+  }
+
+  pre code {
+    @apply block;
+    line-height: 1.6;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

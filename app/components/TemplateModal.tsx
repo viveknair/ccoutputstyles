@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { X, Terminal, Download } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
+import { X, Terminal, Copy, Check } from 'lucide-react';
 import { OutputStyleTemplate } from '@/src/shared/types';
-import CopyButton from './CopyButton';
+import { useState } from 'react';
 
 interface TemplateModalProps {
   template: OutputStyleTemplate;
@@ -15,6 +14,8 @@ interface TemplateModalProps {
 
 export default function TemplateModal({ template, isOpen, onClose, baseUrl }: TemplateModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [copiedContent, setCopiedContent] = useState(false);
+  const [copiedCommand, setCopiedCommand] = useState(false);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -36,82 +37,114 @@ export default function TemplateModal({ template, isOpen, onClose, baseUrl }: Te
 
   const npxCommand = `npx ccoutputstyle --url ${baseUrl}/templates/${template.fileName.replace('.md', '')}`;
 
+  const handleCopyContent = async () => {
+    await navigator.clipboard.writeText(template.content);
+    setCopiedContent(true);
+    setTimeout(() => setCopiedContent(false), 2000);
+  };
+
+  const handleCopyCommand = async () => {
+    await navigator.clipboard.writeText(npxCommand);
+    setCopiedCommand(true);
+    setTimeout(() => setCopiedCommand(false), 2000);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+    <div 
+      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-lg shadow-xl overflow-hidden"
+        className="relative w-full max-w-4xl max-h-[85vh] bg-background rounded-lg shadow-xl overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <div className="border-b px-6 py-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-foreground">
               {template.name}
             </h2>
-            <button
-              onClick={onClose}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-            </button>
+            <p className="text-sm text-muted-foreground mt-1">
+              {template.description}
+            </p>
           </div>
-          <p className="mt-1 text-gray-600 dark:text-gray-300">
-            {template.description}
-          </p>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-muted rounded-md transition-colors"
+            aria-label="Close modal"
+          >
+            <X className="w-4 h-4 text-muted-foreground" />
+          </button>
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto p-6" style={{ maxHeight: 'calc(90vh - 200px)' }}>
+        <div className="flex-1 overflow-y-auto p-6">
           {/* Installation Command */}
-          <div className="mb-6 p-4 bg-gray-900 dark:bg-black rounded-lg">
+          <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-green-400" />
-                <span className="text-sm font-medium text-gray-300">Install with npx</span>
-              </div>
-              <CopyButton text={npxCommand} />
+              <label className="text-sm font-medium text-foreground">Install Command</label>
+              <button
+                onClick={handleCopyCommand}
+                className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md transition-colors hover:bg-muted"
+              >
+                {copiedCommand ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3 h-3" />
+                    Copy
+                  </>
+                )}
+              </button>
             </div>
-            <pre className="text-sm text-gray-300 font-mono overflow-x-auto">
-              <code>{npxCommand}</code>
-            </pre>
+            <div className="bg-muted rounded-md p-3 flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+              <code className="text-sm font-mono text-foreground break-all">
+                {npxCommand}
+              </code>
+            </div>
           </div>
 
           {/* Template Content */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Template Content
-              </h3>
-              <CopyButton text={template.content} />
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="text-sm font-medium text-foreground">Template Content</label>
+              <button
+                onClick={handleCopyContent}
+                className="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-md transition-colors hover:bg-muted"
+              >
+                {copiedContent ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3 h-3" />
+                    Copy
+                  </>
+                )}
+              </button>
             </div>
             
+            {/* Hidden data for CLI extraction */}
             <div
-              className="prose prose-gray dark:prose-invert max-w-none p-4 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-x-auto"
+              className="hidden"
               data-template-content={template.content}
               data-template-name={template.name}
               data-template-description={template.description}
-            >
-              <pre className="language-markdown">
-                <code>{template.content}</code>
-              </pre>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-mono">{template.fileName}</span>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              >
-                Close
-              </button>
-            </div>
+            />
+            
+            {/* Visible template content */}
+            <pre className="bg-muted rounded-md p-4 overflow-x-auto">
+              <code className="text-sm font-mono text-foreground whitespace-pre-wrap">
+                {template.content}
+              </code>
+            </pre>
           </div>
         </div>
       </div>

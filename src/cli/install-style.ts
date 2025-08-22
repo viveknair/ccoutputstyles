@@ -43,7 +43,6 @@ export async function installStyle(template: OutputStyleTemplate, projectLevel: 
 }
 
 async function promptOverwrite(fileName: string): Promise<boolean> {
-  console.log(chalk.yellow(`⚠️  File ${fileName} already exists.`));
-  console.log(chalk.yellow('Overwriting...'));
-  return true; // For simplicity, auto-overwrite. Could add interactive prompt later.
+  // File exists, will be overwritten
+  return true;
 }
