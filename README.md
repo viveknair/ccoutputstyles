@@ -61,7 +61,7 @@ npx ccoutputstyle --url <template-url> --project
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ccoutputstyles.git
+git clone https://github.com/viveknair/ccoutputstyles.git
 cd ccoutputstyles
 
 # Install dependencies
@@ -136,4 +136,4 @@ MIT License - see LICENSE file for details
 
 - [Website](https://ccoutputstyles.vercel.app)
 - [npm Package](https://www.npmjs.com/package/ccoutputstyles)
-- [GitHub Repository](https://github.com/yourusername/ccoutputstyles)
+- [GitHub Repository](https://github.com/viveknair/ccoutputstyles)

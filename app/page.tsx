@@ -32,7 +32,7 @@ export default function Home() {
             <div>
               <h1 className="text-2xl font-semibold text-foreground flex items-center gap-2">
                 <Sparkles className="w-6 h-6 text-accent" />
-                Claude Code Output Styles
+                ccoutputstyle
               </h1>
               <p className="text-muted-foreground mt-2">
                 Customize Claude Code with pre-built output style templates
@@ -49,7 +49,7 @@ export default function Home() {
                 <Package className="w-5 h-5" />
               </a>
               <a
-                href="https://github.com/yourusername/ccoutputstyles"
+                href="https://github.com/viveknair/ccoutputstyles"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
