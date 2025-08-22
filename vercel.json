@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run build:web",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "regions": ["iad1"]
+}

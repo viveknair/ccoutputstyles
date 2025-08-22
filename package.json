@@ -1,0 +1,55 @@
+{
+  "name": "ccoutputstyles",
+  "version": "1.0.0",
+  "description": "Claude Code output style templates gallery and CLI installer",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "ccoutputstyle": "./bin/ccoutputstyle"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run build:cli && npm run build:web",
+    "build:cli": "tsc -p tsconfig.cli.json",
+    "build:web": "next build",
+    "start": "next start",
+    "prepublishOnly": "npm run build:cli"
+  },
+  "keywords": [
+    "claude",
+    "code",
+    "output-styles",
+    "templates",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "files": [
+    "dist/cli",
+    "bin",
+    "templates",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/node": "^24.3.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.11.0",
+    "chalk": "^5.6.0",
+    "cheerio": "^1.1.2",
+    "clsx": "^2.1.1",
+    "commander": "^14.0.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.541.0",
+    "next": "^15.5.0",
+    "postcss": "^8.5.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0"
+  }
+}
