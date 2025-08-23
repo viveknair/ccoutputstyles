@@ -1,5 +1,7 @@
 # ccoutputstyles
 
+[![asciicast](https://asciinema.org/a/dJLG9t7nNy3QtDM4r5H87y5Jr.svg)](https://asciinema.org/a/dJLG9t7nNy3QtDM4r5H87y5Jr)
+
 CLI tool and template gallery for customizing Claude Code output styles.
 
 **Website:** [ccoutputstyles.vercel.app](https://ccoutputstyles.vercel.app)
