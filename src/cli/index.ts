@@ -5,6 +5,7 @@ import * as p from '@clack/prompts';
 import chalk from 'chalk';
 import { fetchTemplate } from './fetch-template';
 import { installStyle } from './install-style';
+import { fetchTemplatesList } from './fetch-templates-list';
 
 const program = new Command();
 
@@ -121,28 +122,90 @@ program
   .option('-g, --global', 'Install to global level (~/.claude/output-styles)')
   .action(async (options) => {
     if (!options.url) {
+      // Interactive mode - show template selection
       p.intro(chalk.cyan('🎨 Claude Code Output Style Installer'));
       
-      const url = await p.text({
-        message: 'Enter the template URL:',
-        placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
-        validate: (value) => {
-          if (!value) return 'URL is required';
-          try {
-            new URL(value);
-            return;
-          } catch {
-            return 'Please enter a valid URL';
+      const s = p.spinner();
+      s.start('Fetching available templates');
+      
+      let templates;
+      try {
+        templates = await fetchTemplatesList();
+        s.stop('Templates loaded successfully');
+      } catch (error) {
+        s.stop('Failed to fetch templates, falling back to URL input');
+        
+        const url = await p.text({
+          message: 'Enter the template URL:',
+          placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
+          validate: (value) => {
+            if (!value) return 'URL is required';
+            try {
+              new URL(value);
+              return;
+            } catch {
+              return 'Please enter a valid URL';
+            }
+          },
+        });
+
+        if (p.isCancel(url)) {
+          p.cancel('Installation cancelled');
+          process.exit(0);
+        }
+
+        await installTemplate(url as string, options);
+        return;
+      }
+      
+      // Show template selection
+      const selectedTemplate = await p.select({
+        message: 'Select a template to install:',
+        options: [
+          ...templates.map(t => ({
+            value: t.url,
+            label: t.name,
+            hint: t.description.length > 60 
+              ? t.description.substring(0, 57) + '...' 
+              : t.description
+          })),
+          {
+            value: 'custom',
+            label: 'Enter custom URL',
+            hint: 'Provide your own template URL'
           }
-        },
+        ]
       });
 
-      if (p.isCancel(url)) {
+      if (p.isCancel(selectedTemplate)) {
         p.cancel('Installation cancelled');
         process.exit(0);
       }
 
-      await installTemplate(url as string, options);
+      if (selectedTemplate === 'custom') {
+        const url = await p.text({
+          message: 'Enter the template URL:',
+          placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
+          validate: (value) => {
+            if (!value) return 'URL is required';
+            try {
+              new URL(value);
+              return;
+            } catch {
+              return 'Please enter a valid URL';
+            }
+          },
+        });
+
+        if (p.isCancel(url)) {
+          p.cancel('Installation cancelled');
+          process.exit(0);
+        }
+
+        await installTemplate(url as string, options);
+      } else {
+        await installTemplate(selectedTemplate as string, options);
+      }
     } else {
       await installTemplate(options.url, options);
     }
@@ -158,29 +221,90 @@ program
     if (options.url) {
       await installTemplate(options.url, options);
     } else {
-      // Interactive mode
+      // Interactive mode - show template selection
       p.intro(chalk.cyan('🎨 Claude Code Output Style Installer'));
       
-      const url = await p.text({
-        message: 'Enter the template URL:',
-        placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
-        validate: (value) => {
-          if (!value) return 'URL is required';
-          try {
-            new URL(value);
-            return;
-          } catch {
-            return 'Please enter a valid URL';
+      const s = p.spinner();
+      s.start('Fetching available templates');
+      
+      let templates;
+      try {
+        templates = await fetchTemplatesList();
+        s.stop('Templates loaded successfully');
+      } catch (error) {
+        s.stop('Failed to fetch templates, falling back to URL input');
+        
+        const url = await p.text({
+          message: 'Enter the template URL:',
+          placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
+          validate: (value) => {
+            if (!value) return 'URL is required';
+            try {
+              new URL(value);
+              return;
+            } catch {
+              return 'Please enter a valid URL';
+            }
+          },
+        });
+
+        if (p.isCancel(url)) {
+          p.cancel('Installation cancelled');
+          process.exit(0);
+        }
+
+        await installTemplate(url as string, options);
+        return;
+      }
+      
+      // Show template selection
+      const selectedTemplate = await p.select({
+        message: 'Select a template to install:',
+        options: [
+          ...templates.map(t => ({
+            value: t.url,
+            label: t.name,
+            hint: t.description.length > 60 
+              ? t.description.substring(0, 57) + '...' 
+              : t.description
+          })),
+          {
+            value: 'custom',
+            label: 'Enter custom URL',
+            hint: 'Provide your own template URL'
           }
-        },
+        ]
       });
 
-      if (p.isCancel(url)) {
+      if (p.isCancel(selectedTemplate)) {
         p.cancel('Installation cancelled');
         process.exit(0);
       }
 
-      await installTemplate(url as string, options);
+      if (selectedTemplate === 'custom') {
+        const url = await p.text({
+          message: 'Enter the template URL:',
+          placeholder: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer',
+          validate: (value) => {
+            if (!value) return 'URL is required';
+            try {
+              new URL(value);
+              return;
+            } catch {
+              return 'Please enter a valid URL';
+            }
+          },
+        });
+
+        if (p.isCancel(url)) {
+          p.cancel('Installation cancelled');
+          process.exit(0);
+        }
+
+        await installTemplate(url as string, options);
+      } else {
+        await installTemplate(selectedTemplate as string, options);
+      }
     }
   });
 
