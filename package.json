@@ -12,7 +12,11 @@
     "build:cli": "tsc -p tsconfig.cli.json",
     "build:web": "next build",
     "start": "next start",
-    "prepublishOnly": "npm run build:cli"
+    "prepublishOnly": "npm run build:cli",
+    "release": "npm version patch && npm run build:cli && npm publish",
+    "release:minor": "npm version minor && npm run build:cli && npm publish",
+    "release:major": "npm version major && npm run build:cli && npm publish",
+    "prerelease": "npm run build:cli"
   },
   "keywords": [
     "claude",

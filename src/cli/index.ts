@@ -10,7 +10,7 @@ import { fetchTemplatesList } from './fetch-templates-list';
 const program = new Command();
 
 async function installTemplate(url: string, options: any) {
-  p.intro(chalk.cyan('🎨 Claude Code Output Style Installer'));
+  p.intro(chalk.cyan('🎨 ccoutputstyles'));
 
   const s = p.spinner();
   
@@ -123,7 +123,7 @@ program
   .action(async (options) => {
     if (!options.url) {
       // Interactive mode - show template selection
-      p.intro(chalk.cyan('🎨 Claude Code Output Style Installer'));
+      p.intro(chalk.cyan('🎨 ccoutputstyles'));
       
       const s = p.spinner();
       s.start('Fetching available templates');
@@ -222,7 +222,7 @@ program
       await installTemplate(options.url, options);
     } else {
       // Interactive mode - show template selection
-      p.intro(chalk.cyan('🎨 Claude Code Output Style Installer'));
+      p.intro(chalk.cyan('🎨 ccoutputstyles'));
       
       const s = p.spinner();
       s.start('Fetching available templates');
