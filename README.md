@@ -19,7 +19,7 @@ npx ccoutputstyles
 
 ## Contributing Templates
 
-**We strongly encourage template contributions!** The more templates we have, the better Claude Code becomes for everyone.
+Template contributions welcome! The more templates we have, the better this tool becomes.
 
 ### How to Contribute
 
