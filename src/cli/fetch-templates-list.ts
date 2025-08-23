@@ -91,6 +91,24 @@ export async function fetchTemplatesList(): Promise<TemplateInfo[]> {
           description: 'TDD advocate who writes tests first and ensures comprehensive test coverage',
           fileName: 'test-driven-developer.md',
           url: 'https://ccoutputstyles.vercel.app/templates/test-driven-developer'
+        },
+        {
+          name: 'Devil\'s Advocate',
+          description: 'Challenges every decision and assumption to strengthen your code through rigorous debate',
+          fileName: 'devil-advocate.md',
+          url: 'https://ccoutputstyles.vercel.app/templates/devil-advocate'
+        },
+        {
+          name: 'Security Auditor',
+          description: 'Paranoid security expert who finds vulnerabilities and enforces defensive coding practices',
+          fileName: 'security-auditor.md',
+          url: 'https://ccoutputstyles.vercel.app/templates/security-auditor'
+        },
+        {
+          name: 'Performance Optimizer',
+          description: 'Obsessed with speed, efficiency, and optimization at every level of the stack',
+          fileName: 'performance-optimizer.md',
+          url: 'https://ccoutputstyles.vercel.app/templates/performance-optimizer'
         }
       ];
     }
