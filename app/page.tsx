@@ -5,7 +5,7 @@ import { templates } from './data/templates';
 import TemplateCard from './components/TemplateCard';
 import TemplateModal from './components/TemplateModal';
 import { OutputStyleTemplate } from '@/src/shared/types';
-import { Sparkles, Github, Package, Terminal } from 'lucide-react';
+import { Sparkles, Github, Package, Terminal, GitPullRequest, Heart, Users } from 'lucide-react';
 
 export default function Home() {
   const [selectedTemplate, setSelectedTemplate] = useState<OutputStyleTemplate | null>(null);
@@ -62,14 +62,58 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Contribution Banner - Subtle */}
+      <div className="bg-accent/10 border-b border-accent/20">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3 text-sm">
+              <GitPullRequest className="w-4 h-4 text-accent" />
+              <span className="text-muted-foreground">
+                <span className="font-medium text-foreground">Contributions welcome!</span> Share your output styles with the community
+              </span>
+            </div>
+            <a
+              href="https://github.com/viveknair/ccoutputstyles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-accent hover:text-accent/80 font-medium transition-colors"
+            >
+              Submit a template →
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Quick Install Bar */}
       <div className="border-b bg-muted/30">
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center gap-3">
-            <Terminal className="w-4 h-4 text-muted-foreground" />
-            <code className="text-sm font-mono text-muted-foreground">
-              npx ccoutputstyles --url &lt;template-url&gt;
-            </code>
+          <div className="flex items-center justify-center">
+            <div className="relative group">
+              <div className="flex items-center gap-3 bg-muted rounded-md px-4 py-2">
+                <Terminal className="w-4 h-4 text-muted-foreground" />
+                <code className="text-sm font-mono">npx ccoutputstyles</code>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText('npx ccoutputstyles');
+                    // Simple feedback without external dependencies
+                    const btn = event?.target as HTMLElement;
+                    if (btn) {
+                      const originalText = btn.textContent;
+                      btn.textContent = '✓';
+                      setTimeout(() => {
+                        btn.textContent = originalText;
+                      }, 1000);
+                    }
+                  }}
+                  className="ml-2 p-1 rounded hover:bg-background/50 transition-colors"
+                  aria-label="Copy command"
+                >
+                  <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

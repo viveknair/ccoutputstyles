@@ -75,12 +75,6 @@ export async function fetchTemplatesList(): Promise<TemplateInfo[]> {
           url: 'https://ccoutputstyles.vercel.app/templates/critical-code-reviewer'
         },
         {
-          name: 'Friendly Tutor',
-          description: 'Patient and encouraging teacher who explains concepts clearly and celebrates learning progress',
-          fileName: 'friendly-tutor.md',
-          url: 'https://ccoutputstyles.vercel.app/templates/friendly-tutor'
-        },
-        {
           name: 'Concise Engineer',
           description: 'Direct and efficient communicator who provides minimal but complete responses',
           fileName: 'concise-engineer.md',
