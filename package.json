@@ -1,6 +1,6 @@
 {
   "name": "ccoutputstyles",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Claude Code output style templates gallery and CLI installer",
   "main": "dist/cli/index.js",
   "bin": {
