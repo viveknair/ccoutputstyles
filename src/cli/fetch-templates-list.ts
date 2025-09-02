@@ -69,6 +69,12 @@ export async function fetchTemplatesList(): Promise<TemplateInfo[]> {
     if (templates.length === 0) {
       return [
         {
+          name: 'Evan King System Design Reviewer',
+          description: 'Reviews Excalidraw system designs with structured feedback following Evan King\'s interviewer approach',
+          fileName: 'evan-king-system-design-reviewer.md',
+          url: 'https://ccoutputstyles.vercel.app/templates/evan-king-system-design-reviewer'
+        },
+        {
           name: 'Critical Code Reviewer',
           description: 'Uncompromising technical reviewer focused on correctness, maintainability, and engineering truth over comfort',
           fileName: 'critical-code-reviewer.md',
@@ -117,6 +123,12 @@ export async function fetchTemplatesList(): Promise<TemplateInfo[]> {
   } catch (error) {
     // Return a hardcoded list as fallback
     return [
+      {
+        name: 'Evan King System Design Reviewer',
+        description: 'Reviews Excalidraw system designs with structured feedback following Evan King\'s interviewer approach',
+        fileName: 'evan-king-system-design-reviewer.md',
+        url: 'https://ccoutputstyles.vercel.app/templates/evan-king-system-design-reviewer'
+      },
       {
         name: 'Critical Code Reviewer',
         description: 'Uncompromising technical reviewer focused on correctness, maintainability, and engineering truth over comfort',
